@@ -19,6 +19,24 @@ BLUE =  (  0,   0, 255)
 GREEN = (  0, 255,   0)
 RED =   (255,   0,   0)
 
+###############################################
+##
+##  Control VAR
+####################################################
+
+# 0 -> dot
+# 1 -> line
+# 2 -> circle
+# 3 -> polygon
+_STRUCTURE = 0
+
+# 0 -> black
+# 1 -> white
+# 2 -> blue
+# 3 -> green
+# 4 -> red
+_COLOR = BLACK
+
 
 ###############################################
 ##
@@ -33,31 +51,15 @@ _dots = list()
 
 #Lines example
 _line = list()
-_line.append(line.Line(nodeA_ForLine, nodeB_ForLine, 2, BLACK))
 
 #Circle Example
-rad = 30
 _circles = list()
-_circles.append(circle.Circle([78, 78], rad, BLACK))
-
 
 #Polygon Example
-#aux nodes
-n_s = list()
-n_s.append(node.Node(200, 200))
-n_s.append(node.Node(210, 230))
-n_s.append(node.Node(250, 240))
-n_s.append(node.Node(140, 180))
-
 _polygons = list()
-_polygons.append(polygon.Polygon(BLACK, 5))
-for i in n_s:
-    _polygons[0].push(i)
 
-###############################################
-##
-##  Geometric Types - END
-######################################################
+
+#############################################################
  
 size = [1000, 800]
 screen = pygame.display.set_mode(size)
@@ -68,31 +70,102 @@ done = False
 clock = pygame.time.Clock()
  
 while not done:
- 
-    clock.tick(10)
-     
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done=True 
-     
-    screen.fill(WHITE)
 
-    #Draw all lines into _line vector
-    for l in _line:
-        pygame.draw.line(screen, l.getColor(), l.getNode1(), l.getNode2(), l.getSize())
+	########################################################
+	##
+	##  User "interface"
+	##################################################################
+	
+	print("####################")
+	print("ADD AN:")
+	print("0 - Dot")
+	print("1 - Line")
+	print("2 - Circle")
+	print("3 - Polygon")
 
-    #Draws all circles into _circle vector
-    for c in _circles:
-        pygame.draw.circle(screen, c.getColor(), c.getCenter(), c.getRadius())
+	_STRUCTURE = int(input())
 
-    #Draws all polygons into _polygons vextor
-    for p in _polygons:
-        pygame.draw.polygon(screen, p.getColor(), p.getNodes(), p.getSize())   
+	if(_STRUCTURE == 0):
+		print("####################")
+		print("ADD AN:")
 
-    #pygame.draw.rect(screen, BLACK, [150, 10, 50, 20])
+	elif(_STRUCTURE == 1):
+		print("####################")
+		print("PLEASE, ENTER VALUE FOR: ")
+		ax = int(input("Node A, X: "))
+		ay = int(input("Node A, Y: "))
+		bx = int(input("Node B, X: "))
+		by = int(input("Node b, y: "))
+		print("PLEASE, ENTER COLOR: ")
+		print("0 - Black")
+		print("1 - White")
+		_COLOR = int(input())
+		if(_COLOR):
+			_COLOR = WHITE
+		else:
+			_COLOR = BLACK
+		nodeA = node.Node(ax, ay)
+		nodeB = node.Node(bx, by)
+		_line.append(line.Line(nodeA, nodeB, 2, _COLOR))
 
-    #Update function based on clock
-    pygame.display.flip()
+	elif(_STRUCTURE == 2):
+		print("####################")
+		print("PLEASE, ENTER VALUE FOR CENTER: ")
+		ax = int(input("Node A, X: "))
+		ay = int(input("Node B, Y: "))
+		raio = int(input("Radious: "))
+		print("PLEASE, ENTER COLOR: ")
+		print("0 - Black")
+		print("1 - White")
+		_COLOR = int(input())
+		if(_COLOR):
+			_COLOR = WHITE
+		else:
+			_COLOR = BLACK
+
+		_circles.append(circle.Circle([ax, ay], raio, _COLOR))
+
+	elif(_STRUCTURE == 3):
+		print("####################")
+		_num = int(input("Number of dots: "))
+		_p = polygon.Polygon(BLACK, 5)
+		for i in range(_num):
+			a = int(input("X: "))
+			b = int(input("Y: "))
+			_n = node.Node(a, b)
+			_p.push(_n)
+		_polygons.append(_p)
+
+	elif(_STRUCTURE == -1):
+		done = True
+
+
+	##################################################################
+
+	clock.tick(10)
+	 
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			done=True 
+	 
+	screen.fill(WHITE)
+
+	#Draw all lines into _line vector
+	for l in _line:
+		pygame.draw.line(screen, l.getColor(), l.getNode1(), l.getNode2(), l.getSize())
+
+	#Draws all circles into _circle vector
+	for c in _circles:
+		pygame.draw.circle(screen, c.getColor(), c.getCenter(), c.getRadius())
+
+	#Draws all polygons into _polygons vextor
+	for p in _polygons:
+		pygame.draw.polygon(screen, p.getColor(), p.getNodes(), p.getSize())   
+
+	#pygame.draw.rect(screen, BLACK, [150, 10, 50, 20])
+
+	#Update function based on clock
+	pygame.display.flip()
  
 # Be IDLE friendly
 pygame.quit()
