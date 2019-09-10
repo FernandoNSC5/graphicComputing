@@ -19,11 +19,11 @@
 
 class Node:
 
-    def __init__(self, x, y, color):
+    def __init__(self, x, y):
         print("[SYSTEM] Node class created")
         self.x = x
         self.y = y
-        self.color = color
+        self.color = '#FFFFFF'
         self.visible = False
 
 

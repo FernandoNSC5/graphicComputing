@@ -20,10 +20,13 @@
 from node import Node as Nd
 
 class Polygon:
-    def __init__(self, color, fill):
+
+    def __init__(self, color, size):
         self.nodes = []
         self.color = color
-        self.fill = fill
+        #line size
+        self.size = size
+        #self.fill = fill
         self.visible = False
 
     #######################################
@@ -31,7 +34,7 @@ class Polygon:
     #######################################
     
     def push(self, node):
-        self.nodes.append(node)
+        self.nodes.append(node.getPos())
         
     def pop(self, pos):
         try:
@@ -77,6 +80,9 @@ class Polygon:
     def getFill(self):
         return self.fill
 
+    def getSize(self):
+        return self.size
+
     def setNodes(self, nodes):
         self.nodes = nodes
 
@@ -85,3 +91,6 @@ class Polygon:
 
     def setFill(self, fill):
         self.fill = fill
+
+    def setSize(self, size):
+        self.size = size

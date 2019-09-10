@@ -19,13 +19,13 @@
 
 from node import Node as nd
 
-class Line:
+class Circle:
 
-    def __init__(self, center, radius, color, fill):
-        self.center = center
+    def __init__(self, center, radius, color):
+        self.center = nd(center[0], center[1])
         self.radius = radius
         self.color = color
-        self.fill = fill
+        #self.fill = fill
         self.visible = False
         
     #######################################
@@ -48,7 +48,7 @@ class Line:
     #######################################
 
     def getCenter(self):
-        return self.center
+        return self.center.getPos()
 
     def getRadius(self):
         return self.radius

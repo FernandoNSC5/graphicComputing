@@ -21,9 +21,10 @@ from node import Node as nd
 
 class Line:
 
-    def __init__(self, node1, node2, color):
+    def __init__(self, node1, node2, size, color):
         self.node1 = node1
         self.node2 = node2
+        self.size = size
         self.color = color
         self.visible = False
         
@@ -50,13 +51,16 @@ class Line:
         return [self.node1, self.node2]
 
     def getNode1(self):
-        return self.node1
+        return self.node1.getPos()
 
     def getNode2(self):
-        return self.node2
+        return self.node2.getPos()
 
     def getColor(self):
         return self.color
+
+    def getSize(self):
+        return self.size
 
     def setNodes(self, node1, node2):
         self.node1 = node1
@@ -70,3 +74,6 @@ class Line:
 
     def setColor(self, color):
         self.color = color
+
+    def setSize(self, size):
+        self.size = size
