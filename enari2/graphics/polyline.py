@@ -20,17 +20,18 @@
 from node import Node as Nd
 
 class Polyline:
-    def __init__(self, color):
+    def __init__(self):
         self.nodes = []
-        self.color = color
-        self.visible = False
+        self.color = (255, 255, 255)
+        self.width = 2
+        self.visible = True
 
     #######################################
     ##  Methods
     #######################################
     
     def push(self, node):
-        self.nodes.append(node)
+        self.nodes.append(node.getPos())
         
     def pop(self, pos):
         try:
@@ -54,14 +55,13 @@ class Polyline:
         self.setColor(color)
 
     def show(self):
-        for i in range(len(self.nodes)):
-            self.nodes[i].show()
         self.visible = True
 
     def hide(self):
-        for i in range(len(self.nodes)):
-            self.nodes[i].hide()
         self.visible = False
+    
+    def isVisible(self):
+        return self.visible == 1
         
     #######################################
     ##  Getters and Setters
@@ -73,8 +73,14 @@ class Polyline:
     def getColor(self):
         return self.color
 
+    def getWidth(self):
+        return self.width
+
     def setNodes(self, nodes):
         self.nodes = nodes
 
     def setColor(self, color):
         self.color = color
+
+    def setWidth(self, width):
+        self.width = width

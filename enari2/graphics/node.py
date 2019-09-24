@@ -23,8 +23,8 @@ class Node:
         print("[SYSTEM] Node class created")
         self.x = x
         self.y = y
-        self.color = '#FFFFFF'
-        self.visible = False
+        self.color = (255, 255, 255)
+        self.visible = True
 
 
     #######################################
@@ -42,6 +42,9 @@ class Node:
 
     def hide(self):
         self.visible = False
+
+    def isVisible(self):
+        return self.visible == 1
         
     #######################################
     ##  Getters and Setters

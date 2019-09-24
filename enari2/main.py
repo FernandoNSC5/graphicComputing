@@ -1,4 +1,5 @@
 # Import a library of functions called 'pygame'
+import os
 import pygame
 from math import pi
 import sys
@@ -35,7 +36,7 @@ _STRUCTURE = 0
 # 2 -> blue
 # 3 -> green
 # 4 -> red
-_COLOR = BLACK
+_COLOR = WHITE
 
 
 ###############################################
@@ -47,16 +48,19 @@ nodeA_ForLine = node.Node(5, 5)
 nodeB_ForLine = node.Node(10, 10)
 
 #Dots Example
-_dots = list()
+_nodes = list()
 
 #Lines example
-_line = list()
+_lines = list()
 
 #Circle Example
 _circles = list()
 
 #Polygon Example
 _polygons = list()
+
+#Polyline Example
+_polylines = list()
 
 
 #############################################################
@@ -71,27 +75,117 @@ clock = pygame.time.Clock()
  
 while not done:
 
+	########################################################
+	##
+	##  User "interface"
+	##################################################################
+	
+	os.system('cls' if os.name == 'nt' else 'clear')
+	print("SELECT WHAT TO DRAW:")
+	print("0: Node")
+	print("1: Line")
+	print("2: Circle")
+	print("3: Polygon")
+	print("4: Polyline")
+	print("5: Exit")
+
+	_STRUCTURE = int(input("\nACTION: "))
+	os.system('cls' if os.name == 'nt' else 'clear')
+
+	if(_STRUCTURE == 0):
+		print("####################\nNODE\n####################")
+		print("PLEASE, ENTER THE VALUES:")
+		x = int(input("X: "))
+		y = int(input("Y: "))
+		_nodes.append(node.Node(x, y))
+
+	elif(_STRUCTURE == 1):
+		print("####################\nLINE\n####################")
+		print("PLEASE, ENTER THE VALUES:")
+		x = int(input("X1: "))
+		y = int(input("Y1: "))
+		node1 = node.Node(x, y)
+		x = int(input("X2: "))
+		y = int(input("Y2: "))
+		node2 = node.Node(x, y)
+		_lines.append(line.Line(node1, node2))
+
+	elif(_STRUCTURE == 2):
+		print("####################\nCIRCLE\n####################")
+		print("PLEASE, ENTER THE VALUES:")
+		x = int(input("X: "))
+		y = int(input("Y: "))
+		radius = int(input("Radius: "))
+		filled = int(input("Filled(0 => False, 1 => True): "))
+		_circles.append(circle.Circle(node.Node(x, y), radius, filled))
+
+	elif(_STRUCTURE == 3):
+		print("####################\nPOLYGON\n####################")
+		filled = int(input("Filled(0 => False, 1 => True): "))
+		p = polygon.Polygon(filled)
+		n = int(input("PLEASE, ENTER THE NUMBER OF NODES OF THIS POLYGON: "))
+		for i in range(n):
+			x = int(input("X" + str(i+1) + ": "))
+			y = int(input("Y" + str(i+1) + ": "))
+			p.push(node.Node(x, y))
+		_polygons.append(p)
+
+	elif(_STRUCTURE == 4):
+		print("####################\nPOLYLINE\n####################")
+		p = polyline.Polyline()
+		n = int(input("PLEASE, ENTER THE NUMBER OF NODES OF THIS POLYLINE: "))
+		for i in range(n):
+			x = int(input("X" + str(i+1) + ": "))
+			y = int(input("Y" + str(i+1) + ": "))
+			p.push(node.Node(x, y))
+		_polylines.append(p)
+
+	else:
+		print("Thanks for using our humble code.")
+		break
+
+
+	##################################################################
+
 	clock.tick(10)
 	 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			done=True 
 	 
-	screen.fill(WHITE)
+	screen.fill(BLACK)
 
-	#Draw all lines into _line vector
-	for l in _line:
-		pygame.draw.line(screen, l.getColor(), l.getNode1(), l.getNode2(), l.getSize())
+	#Draw all nodes inside the _nodes vector
+	for n in _nodes:
+		if (n.isVisible()):
+			screen.set_at((n.getX(), n.getY()), n.getColor())
 
-	#Draws all circles into _circle vector
+	#Draw all lines inside the _lines vector
+	for l in _lines:
+		if (l.isVisible()):
+			pygame.draw.line(screen, l.getColor(), l.getNode1(), l.getNode2(), l.getWidth())
+
+	#Draws all circles inside the _circle vector
 	for c in _circles:
-		pygame.draw.circle(screen, c.getColor(), c.getCenter(), c.getRadius())
+		if (c.isVisible()):
+			width = c.getWidth()
+			if (c.isFilled()):
+				width = 0
+			pygame.draw.circle(screen, c.getColor(), c.getCenter(), c.getRadius(), width)
 
-	#Draws all polygons into _polygons vextor
+	#Draws all polygons inside the _polygons vector
 	for p in _polygons:
-		pygame.draw.polygon(screen, p.getColor(), p.getNodes(), p.getSize())   
+		if (p.isVisible()):
+			width = p.getWidth()
+			if (p.isFilled()):
+				width = 0
+			pygame.draw.polygon(screen, p.getColor(), p.getNodes(), width)
 
-	#pygame.draw.rect(screen, BLACK, [150, 10, 50, 20])
+	#Draws all polylines inside the _polylines vector
+	for p in _polylines:
+		if (p.isVisible()):
+			print(p.getNodes())
+			pygame.draw.lines(screen, p.getColor(), False, p.getNodes(), p.getWidth())
 
 	#Update function based on clock
 	pygame.display.flip()

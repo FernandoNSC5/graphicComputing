@@ -17,16 +17,15 @@
 ##                                                                 ##
 #####################################################################
 
-from node import Node as nd
-
 class Circle:
 
-    def __init__(self, center, radius, color):
-        self.center = nd(center[0], center[1])
+    def __init__(self, center, radius, filled):
+        self.center = center
         self.radius = radius
-        self.color = color
-        #self.fill = fill
-        self.visible = False
+        self.color = (255, 255, 255)
+        self.filled = filled
+        self.width = 2
+        self.visible = True
         
     #######################################
     ##  Methods
@@ -36,12 +35,22 @@ class Circle:
         self.setColor(color)
 
     def show(self):
-        self.center.show()
         self.visible = True
 
     def hide(self):
-        self.center.hide()
         self.visible = False
+
+    def fill(self):
+        self.filled = 1
+    
+    def deplenish(self):
+        self.filled = 0
+    
+    def isVisible(self):
+        return self.visible == 1
+
+    def isFilled(self):
+        return self.filled == 1
         
     #######################################
     ##  Getters and Setters
@@ -56,8 +65,8 @@ class Circle:
     def getColor(self):
         return self.color
 
-    def getFill(self):
-        return self.fill
+    def getWidth(self):
+        return self.width
 
     def setCenter(self, center):
         self.center = center
@@ -68,5 +77,5 @@ class Circle:
     def setColor(self, color):
         self.color = color
 
-    def setFill(self, fill):
-        self.fill = fill
+    def setWidth(self, width):
+        self.width = width

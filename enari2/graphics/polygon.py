@@ -21,13 +21,12 @@ from node import Node as Nd
 
 class Polygon:
 
-    def __init__(self, color, size):
+    def __init__(self, filled):
         self.nodes = []
-        self.color = color
-        #line size
-        self.size = size
-        #self.fill = fill
-        self.visible = False
+        self.color = (255, 255, 255)
+        self.width = 2
+        self.filled = filled
+        self.visible = True
 
     #######################################
     ##  Methods
@@ -58,14 +57,22 @@ class Polygon:
         self.setColor(color)
 
     def show(self):
-        for i in range(len(self.nodes)):
-            self.nodes[i].show()
         self.visible = True
 
     def hide(self):
-        for i in range(len(self.nodes)):
-            self.nodes[i].hide()
         self.visible = False
+
+    def fill(self):
+        self.filled = 1
+    
+    def deplenish(self):
+        self.filled = 0
+    
+    def isVisible(self):
+        return self.visible == 1
+
+    def isFilled(self):
+        return self.filled == 1
         
     #######################################
     ##  Getters and Setters
@@ -77,11 +84,8 @@ class Polygon:
     def getColor(self):
         return self.color
 
-    def getFill(self):
-        return self.fill
-
-    def getSize(self):
-        return self.size
+    def getWidth(self):
+        return self.width
 
     def setNodes(self, nodes):
         self.nodes = nodes
@@ -89,8 +93,5 @@ class Polygon:
     def setColor(self, color):
         self.color = color
 
-    def setFill(self, fill):
-        self.fill = fill
-
-    def setSize(self, size):
-        self.size = size
+    def setWidth(self, width):
+        self.width = width

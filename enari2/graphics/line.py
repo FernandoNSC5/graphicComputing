@@ -21,12 +21,12 @@ from node import Node as nd
 
 class Line:
 
-    def __init__(self, node1, node2, size, color):
+    def __init__(self, node1, node2):
         self.node1 = node1
         self.node2 = node2
-        self.size = size
-        self.color = color
-        self.visible = False
+        self.width = 2
+        self.color = (255, 255, 255)
+        self.visible = True
         
     #######################################
     ##  Methods
@@ -36,12 +36,13 @@ class Line:
         self.setColor(color)
 
     def show(self):
-        self.node1.show()
         self.visible = True
 
     def hide(self):
-        self.node2.hide()
         self.visible = False
+
+    def isVisible(self):
+        return self.visible == 1
         
     #######################################
     ##  Getters and Setters
@@ -59,8 +60,8 @@ class Line:
     def getColor(self):
         return self.color
 
-    def getSize(self):
-        return self.size
+    def getWidth(self):
+        return self.width
 
     def setNodes(self, node1, node2):
         self.node1 = node1
@@ -75,5 +76,5 @@ class Line:
     def setColor(self, color):
         self.color = color
 
-    def setSize(self, size):
-        self.size = size
+    def setWidth(self, width):
+        self.width = width
