@@ -43,6 +43,9 @@ class Line:
 
     def isVisible(self):
         return self.visible == 1
+
+    def changeLineSize(self, newSize):
+        self.width = int(newSize)
         
     #######################################
     ##  Getters and Setters

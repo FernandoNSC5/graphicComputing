@@ -6,6 +6,7 @@ import sys
 sys.path.append('graphics')
 import circle
 import line
+import time
 import node
 import polygon
 import polyline
@@ -62,7 +63,6 @@ _polygons = list()
 #Polyline Example
 _polylines = list()
 
-
 #############################################################
  
 size = [1000, 800]
@@ -87,7 +87,9 @@ while not done:
 	print("2: Circle")
 	print("3: Polygon")
 	print("4: Polyline")
-	print("5: Exit")
+	print("5: Change Sizes")
+	print("6: Move X|Y")
+	print("7: Exit")
 
 	_STRUCTURE = int(input("\nACTION: "))
 	os.system('cls' if os.name == 'nt' else 'clear')
@@ -139,6 +141,44 @@ while not done:
 			y = int(input("Y" + str(i+1) + ": "))
 			p.push(node.Node(x, y))
 		_polylines.append(p)
+
+	elif(_STRUCTURE == 5):
+		print("####################\nSIZE MODULATION\n####################")
+		print("WHAT TO CHANGE:")
+		print("a: Line")
+		print("b: Circle")
+		print("c: Polygon")
+		print("d: Polyline")
+		wtc = input()
+
+		#####################################################################
+		##	Listing existing elements
+		#####################################################################
+		if(wtc == 'a'):
+			if(len(_lines) == 0):
+				print("No line on screen")
+				time.sleep(2)
+				continue
+			else:
+				counter = 0
+				print("####################\nELEMENTS ON SCREEN\n####################\n")
+				for i in _lines:
+					print("Line " + str(counter))
+					counter = counter + 1
+				print("\n\n####################\nSELECT THE ELEMENT TO CHANGE\n####################\n")
+				vetIndex = int(input("Element to change: "))
+				newSize = input("New size: ")
+				_lines[vetIndex].changeLineSize(newSize)
+
+		#elif(wtc == 'b'):
+		#elif(wtc == 'c'):
+		#elif(wtc == 'd'):
+		#elif(wtc == 'e'):
+		else:
+			print("Inexistent option")
+			time.sleep(2)
+			continue
+
 
 	else:
 		print("Thanks for using our humble code.")
