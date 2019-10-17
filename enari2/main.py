@@ -185,8 +185,21 @@ while not done:
 				vetIndex = int(input("Element to change: "))
 				newSize = input("New radio size: ")
 				_circles[vetIndex].setRadius(newSize)
-
-		#elif(wtc == 'c'):
+		elif(wtc == 'c'):
+			if(len(_polygons) == 0):
+				print("No polygon on screen")
+				time.sleep(_SLEEP_TIME)
+				continue
+			else:
+				counter = 0
+				print("####################\nELEMENTS ON SCREEN\n####################\n")
+				for i in _polygons:
+					print("Polygon " + str(counter))
+					counter = counter + 1
+				print("\n\n####################\nSELECT THE ELEMENT TO CHANGE\n####################\n")
+				vetIndex = int(input("Element to change: "))
+				newSize = input("New size: ")
+				_polygon[vetIndex].changeLinesSize(newSize)
 		#elif(wtc == 'd'):
 		#elif(wtc == 'e'):
 		else:
