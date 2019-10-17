@@ -72,7 +72,7 @@ class Circle:
         self.center = center
 
     def setRadius(self, radius):
-        self.radius = radius
+        self.radius = int(radius)
 
     def setColor(self, color):
         self.color = color

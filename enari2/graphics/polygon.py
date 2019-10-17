@@ -40,6 +40,17 @@ class Polygon:
             return self.nodes.pop(pos)
         except Exception:
             raise "Node not found."
+
+    def changePolygonSize(self, newSize, op):
+        newSize = int(newSize)
+        if(op):
+            for i in range(len(self.nodes)):
+                if i == 0: continue
+                self.nodes[i] = [self.nodes[i][0]+newSize, self.nodes[i][1]+newSize]
+        else:
+            for i in range(len(self.nodes)):
+                if i == 0: continue
+                self.nodes[i] = [self.nodes[i][0]-newSize, self.nodes[i][1]-newSize]
         
     def popFirst(self):
         try:

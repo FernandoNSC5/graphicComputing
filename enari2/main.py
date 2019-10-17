@@ -198,8 +198,16 @@ while not done:
 					counter = counter + 1
 				print("\n\n####################\nSELECT THE ELEMENT TO CHANGE\n####################\n")
 				vetIndex = int(input("Element to change: "))
-				newSize = input("New size: ")
-				_polygon[vetIndex].changeLinesSize(newSize)
+				print("\n\n####################\nIncrease size/Decrease size\n####################\n")
+				print("0 - Increase")
+				print("1 - Decrease")
+				incDec = int(input())
+				if(incDec):
+					newSize = input("Pixel Decrease: ")
+					_polygons[vetIndex].changePolygonSize(newSize, incDec)
+				else:
+					newSize = input("Pixel Increase: ")
+					_polygons[vetIndex].changePolygonSize(newSize, incDec)
 		#elif(wtc == 'd'):
 		#elif(wtc == 'e'):
 		else:
