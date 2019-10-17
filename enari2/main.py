@@ -71,6 +71,7 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Enarin")
 
 done = False
+_SLEEP_TIME = 2
 clock = pygame.time.Clock()
  
 while not done:
@@ -157,7 +158,7 @@ while not done:
 		if(wtc == 'a'):
 			if(len(_lines) == 0):
 				print("No line on screen")
-				time.sleep(2)
+				time.sleep(_SLEEP_TIME)
 				continue
 			else:
 				counter = 0
@@ -169,8 +170,22 @@ while not done:
 				vetIndex = int(input("Element to change: "))
 				newSize = input("New size: ")
 				_lines[vetIndex].changeLineSize(newSize)
+		elif(wtc == 'b'):
+			if(len(_circles) == 0):
+				print("No circles on screen")
+				time.sleep(_SLEEP_TIME)
+				continue
+			else:
+				counter = 0
+				print("####################\nELEMENTS ON SCREEN\n####################\n")
+				for i in _circles:
+					print("Circle " + str(counter))
+					counter = counter + 1
+				print("\n\n####################\nSELECT THE ELEMENT TO CHANGE\n####################\n")
+				vetIndex = int(input("Element to change: "))
+				newSize = input("New radio size: ")
+				_circles[vetIndex].setRadius(newSize)
 
-		#elif(wtc == 'b'):
 		#elif(wtc == 'c'):
 		#elif(wtc == 'd'):
 		#elif(wtc == 'e'):
