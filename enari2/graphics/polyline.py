@@ -29,6 +29,12 @@ class Polyline:
     #######################################
     ##  Methods
     #######################################
+    def alterPosition(self, x, y):
+        for n in range(len(self.nodes)):
+            _x = self.nodes[n].getX()
+            _y = self.nodes[n].getY()
+            self.nodes[n].setX(_x+x)
+            self.nodes[n].setY(_y+y)
     
     def push(self, node):
         self.nodes.append(node.getPos())

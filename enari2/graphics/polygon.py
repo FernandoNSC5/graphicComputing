@@ -31,6 +31,13 @@ class Polygon:
     #######################################
     ##  Methods
     #######################################
+
+    def alterPosition(self, x, y):
+        for n in range(len(self.nodes)):
+            _x = nodes[n].getX()
+            _y = nodes[n].getY()
+            nodes[n].setX(_x+x)
+            nodes[n].setY(_y+y)
     
     def push(self, node):
         self.nodes.append(node.getPos())

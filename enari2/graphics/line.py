@@ -31,6 +31,17 @@ class Line:
     #######################################
     ##  Methods
     #######################################
+
+    def alterPosition(self, x, y):
+        _x = self.node1.getX()
+        _y = self.node1.getY()
+        self.node1.setX(_x+x)
+        self.node1.setY(_y+y)
+
+        _x = self.node2.getX()
+        _y = self.node2.getY()
+        self.node2.setX(_x+x)
+        self.node2.setY(_y+y)
     
     def changeColor(self, color):
         self.setColor(color)

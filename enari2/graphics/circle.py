@@ -30,6 +30,12 @@ class Circle:
     #######################################
     ##  Methods
     #######################################
+
+    def alterCenter(self, x, y):
+        _x = self.center.getX()
+        _y = self.center.getY()
+        self.center.setX(_x+x)
+        self.center.setY(_y+y)
     
     def changeColor(self, color):
         self.setColor(color)

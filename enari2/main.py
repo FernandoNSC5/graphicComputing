@@ -214,7 +214,68 @@ while not done:
 			print("Inexistent option")
 			time.sleep(2)
 			continue
+	elif(_STRUCTURE == 6):
+		print("####################\nPOSITION MODULATION\n####################")
+		print("Position TO CHANGE:")
+		print("a: Dot")
+		print("b: Line")
+		print("c: Circle")
+		print("d: Polygon")
+		print("e: Polyline")
+		pc = input()
 
+		if(pc == 'a'):
+			print("####################\nNODE POSITION ALTERATION\n####################")
+			print("X Increment/Decrement:")
+			x = int(input())
+			print("Y Increment/Decrement:")
+			y = int(input())
+
+			for n in range(len(_nodes)):
+				_x = _nodes[n].getX()
+				_y = _nodes[n].getY()
+				_nodes[n].setX(_x+x)
+				_nodes[n].setY(_y+y)
+
+		elif(pc == 'b'):
+			print("####################\nLINE POSITION ALTERATION\n####################")
+			print("X Increment/Decrement:")
+			x = int(input())
+			print("Y Increment/Decrement:")
+			y = int(input())
+
+			for n in range(len(_lines)):
+				_lines[n].alterPosition(x, y)
+
+		elif(pc == 'c'):
+			print("####################\nCIRCLE POSITION ALTERATION\n####################")
+			print("X Increment/Decrement:")
+			x = int(input())
+			print("Y Increment/Decrement:")
+			y = int(input())
+
+			for n in range(len(_circles)):
+				_circles[n].alterCenter(x, y)
+
+		elif(pc == 'd'):
+			print("####################\nPOLYGON POSITION ALTERATION\n####################")
+			print("X Increment/Decrement:")
+			x = int(input())
+			print("Y Increment/Decrement:")
+			y = int(input())
+
+			for n in range(len(_polygons)):
+				_polygons[n].alterPosition(x, y)
+
+		elif(pc == 'e'):
+			print("####################\nPOLYLINE POSITION ALTERATION\n####################")
+			print("X Increment/Decrement:")
+			x = int(input())
+			print("Y Increment/Decrement:")
+			y = int(input())
+
+			for n in range(len(_polylines)):
+				_polylines.alterPosition(x, y)
 
 	else:
 		print("Thanks for using our humble code.")
